@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import logoToDoList from './assets/logoToDoList.svg';
+import styles from './App.module.css';
 
+
+export function App() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <>
+      <header className={styles.header}>
+        <img src={logoToDoList} alt="Um foguete mais a descrição toDo, formando a logo do toDo List" />
+      </header>
+
+      <nav>
+        <input placeholder='Adicione uma nova tarefa' type="text" />
+        <button>Criar + logo</button>
+      </nav>
+
+      <main>
+        <article>
+          <div>
+            <p>Tarefas criadas<span>0</span></p>
+            <p>Concluídas<span>0</span></p>
+          </div>
+
+          <div>
+            tem uma logo aqui
+            <span>Você ainda não tem tarefas cadastradas</span>
+            <span>Crie tarefas e organize seus itens a fazer</span>
+          </div>
+        </article>
+      </main>
+    </>
   )
 }
-
-export default App
