@@ -6,21 +6,6 @@ import logoToDoList from './assets/logoToDoList.svg';
 import taskFileIcon from './assets/taskFileIcon.svg';
 import styles from './App.module.css';
 
-let tasksData = [
-  {
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer. Duis vel sed fames integer.',
-    isConcluded: false
-  },
-  {
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer. Duis vel sed fames integer.',
-    isConcluded: false
-  },
-  {
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer. Duis vel sed fames integer.',
-    isConcluded: true
-  }
-]
-
 export function App() {
 
   const [tasks, setTasks] = useState<TaskProps[]>([]);
@@ -29,6 +14,7 @@ export function App() {
   });
 
   const isAmountTasksZero = tasks.length === 0;
+  const completedTasks = tasks.filter(task => task.isConcluded === true);
 
   function showDisplayWithZeroTasks() {
     return (
@@ -42,12 +28,33 @@ export function App() {
 
   function handleCreateNewTask() {
     setTasks([...tasks, newTask]);
-    setNewTask({description: ''});
+    setNewTask({
+      description: '',
+    });
   }
 
   function deleteTask(taskToDelete: string) {
     const tasksWithoutTheDeleted = tasks.filter(task => task.description !== taskToDelete);
     setTasks(tasksWithoutTheDeleted);
+  }
+
+  function completeTask(taskToComplete: string) {
+
+    const taskWithoutTheCompleted = tasks.map(task => {
+      if (task.description === taskToComplete) {
+        return {
+          description: task.description,
+          isConcluded: task.isConcluded = task.isConcluded === false ? true : false
+        };
+      } else {
+        return {
+          description: task.description,
+          isConcluded: task.isConcluded
+        };
+      }
+    });
+
+    setTasks(taskWithoutTheCompleted);
   }
 
   return (
@@ -57,15 +64,13 @@ export function App() {
       </header>
 
       <nav className={styles.navToAddTheTasks}>
-        <input 
+        <input
           value={newTask.description}
-          onChange={(event) => setNewTask({description: event.target.value})}
+          onChange={(event) => setNewTask({ description: event.target.value })}
           placeholder='Adicione uma nova tarefa'
-          type="text" 
+          type="text"
         />
-        <button
-          onClick={handleCreateNewTask}
-        >
+        <button onClick={handleCreateNewTask}>
           Criar {<HiOutlinePlusCircle size={15} />}
         </button>
       </nav>
@@ -74,15 +79,23 @@ export function App() {
         <div className={styles.containerCreatedTasksAndFinishedTasks}>
           <p>Tarefas criadas<span>{tasks.length}</span></p>
 
-          <p>Concluídas<span>0</span></p>
+          <p>Concluídas 
+            {
+              isAmountTasksZero ? 
+                <span>{tasks.length}</span> : 
+                <span className={styles.completedTasks}>{`${completedTasks.length} de ${tasks.length}`}</span>
+            } 
+          </p>
         </div>
-        
+
         {
           isAmountTasksZero ? showDisplayWithZeroTasks() : tasks.map(task => (
-            <Task 
-              description={task.description} 
+            <Task
+              key={String(`${task.description}_${Math.random()}`)}
+              description={task.description}
               isConcluded={task.isConcluded}
               onDeleteTask={deleteTask}
+              onCompleteTask={completeTask}
             />
           ))
         }
