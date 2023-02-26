@@ -1,0 +1,66 @@
+.taskContainer {
+   display: flex;
+   align-items: flex-start;
+   padding: 1.6rem;
+   gap: 1.2rem;
+
+   margin-bottom: 1.2rem;
+   background: var(--gray-500);
+   
+   border: 1px solid var(--gray-400);
+   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+   border-radius: 8px;
+}
+
+.taskContainer button {
+   background: none;
+   border: none;
+
+   width: 2.4rem;
+   height: 2.4rem;
+   padding: 0.4rem;
+
+   transition: background-color 0.1s, color 0.1s;
+   cursor: pointer;
+}
+
+.taskContainer .uncheckedCheckbox {
+   color: var(--blue);
+}
+
+.taskContainer .checkedCheckbox {
+   color: var(--gray-100);
+   fill: var(--purple-dark);
+}
+
+.taskContainer .uncheckedCheckbox:hover {
+   background: var(--blue-dark);
+   border-radius: 999px;
+   opacity: 0.5;
+}
+
+.taskContainer .checkedCheckbox:hover {
+   fill: var(--purple);
+   border-radius: 999px;
+   opacity: 0.5;
+}
+
+.taskContainer .deleteTaskButton{
+   color: var(--gray-300);
+}
+
+.taskContainer .deleteTaskButton:hover{
+   color: var(--red-danger);
+   background: var(--gray-400);
+   border-radius: 4px;
+}
+
+.taskContainer p {
+   width: 75rem;
+   font-size: 1.4rem;
+   color: var(--gray-100);
+}
+
+.taskContainer p s {
+   color: var(--gray-300);
+}
